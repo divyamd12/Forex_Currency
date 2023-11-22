@@ -15,7 +15,7 @@ from datetime import datetime
 app = Flask(__name__) 
 
 df_s=pd.DataFrame()
-for i in range(12,22):
+for i in range(12,23):
     temp_df = pd.read_csv(f"Exchange_Rate_Report_20{i}.csv")
     df_s=pd.concat([df_s,temp_df], ignore_index=True)
 df_s.set_index("Date")

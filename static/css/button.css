@@ -6,7 +6,6 @@
   cursor: pointer;
   font: 700 14px 'Montserrat', sans-serif;
   height: 48px;
-  margin-top: 50px;
   padding:12px 24px;
   transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
 }
