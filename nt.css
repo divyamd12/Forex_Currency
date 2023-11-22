@@ -39,15 +39,18 @@ body {
     width:80%;
     display: flex;
     padding:30px;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction:row;
     align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 
 }
 
-.innerContainer nt-logo{
-    background-color: white;
+.bothCurrencies{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
 }
 .currencyContainer{
     display: flex;

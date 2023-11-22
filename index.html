@@ -17,69 +17,83 @@
     <div class="mainContainer">
         <div class="innerContainer">
             <img src="./nt_logo.png" class="nt-logo" />
-            <div class="currencyContainer">
-                <label for="currencies">Currency 1</label>
-                <select id="currency2" name="currencies">
-                    <option value="usd" selected>U.S. dollar (USD)</option>
-                </select>
-            </div>
-            <div class="currencyContainer">
-                <label for="currencies">Currency 2</label>
-                <select id="currency2" name="currencies">
-                    <option value="usd" selected>U.S. dollar (USD)</option>
-                    <option value="dzd">Algerian dinar (DZD)</option>
-                    <option value="aud">Australian dollar (AUD)</option>
-                    <option value="bhd">Bahrain dinar (BHD)</option>
-                    <option value="vef">Bolivar Fuerte (VEF)</option>
-                    <option value="bwp">Botswana pula (BWP)</option>
-                    <option value="brl">Brazilian real (BRL)</option>
-                    <option value="bnd">Brunei dollar (BND)</option>
-                    <option value="cad">Canadian dollar (CAD)</option>
-                    <option value="clp">Chilean peso (CLP)</option>
-                    <option value="cny">Chinese yuan (CNY)</option>
-                    <option value="cop">Colombian peso (COP)</option>
-                    <option value="czk">Czech koruna (CZK)</option>
-                    <option value="dkk">Danish krone (DKK)</option>
-                    <option value="eur">Euro (EUR)</option>
-                    <option value="huf">Hungarian forint (HUF)</option>
-                    <option value="isk">Icelandic krona (ISK)</option>
-                    <option value="inr">Indian rupee (INR)</option>
-                    <option value="idr">Indonesian rupiah (IDR)</option>
-                    <option value="irr">Iranian rial (IRR)</option>
-                    <option value="ils">Israeli New Shekel (ILS)</option>
-                    <option value="jpy">Japanese yen (JPY)</option>
-                    <option value="kzt">Kazakhstani tenge (KZT)</option>
-                    <option value="krw">Korean won (KRW)</option>
-                    <option value="kwd">Kuwaiti dinar (KWD)</option>
-                    <option value="lyd">Libyan dinar (LYD)</option>
-                    <option value="myr">Malaysian ringgit (MYR)</option>
-                    <option value="mur">Mauritian rupee (MUR)</option>
-                    <option value="mxn">Mexican peso (MXN)</option>
-                    <option value="npr">Nepalese rupee (NPR)</option>
-                    <option value="nzd">New Zealand dollar (NZD)</option>
-                    <option value="nok">Norwegian krone (NOK)</option>
-                    <option value="omr">Omani rial (OMR)</option>
-                    <option value="pkr">Pakistani rupee (PKR)</option>
-                    <option value="pen">Peruvian sol (PEN)</option>
-                    <option value="php">Philippine peso (PHP)</option>
-                    <option value="pln">Polish zloty (PLN)</option>
-                    <option value="qar">Qatari riyal (QAR)</option>
-                    <option value="rub">Russian ruble (RUB)</option>
-                    <option value="sar">Saudi Arabian riyal (SAR)</option>
-                    <option value="sgd">Singapore dollar (SGD)</option>
-                    <option value="zar">South African rand (ZAR)</option>
-                    <option value="lkr">Sri Lankan rupee (LKR)</option>
-                    <option value="sek">Swedish krona (SEK)</option>
-                    <option value="chf">Swiss franc (CHF)</option>
-                    <option value="thb">Thai baht (THB)</option>
-                    <option value="ttd">Trinidadian dollar (TTD)</option>
-                    <option value="tnd">Tunisian dinar (TND)</option>
-                    <option value="aed">U.A.E. dirham (AED)</option>
-                    <option value="gbp">U.K. pound (GBP)</option>
-                    <option value="uyu">Uruguayan peso (UYU)</option>
-                </select>
+            <div>
+                <div class="bothCurrencies">
+                    <div class="currencyContainer">
+                        <label for="currencies">Currency 1</label>
+                        <select id="currency2" name="currencies">
+                            <option value="usd" selected>U.S. dollar (USD)</option>
+                        </select>
+                    </div>
+                    <div class="currencyContainer">
+                        <label for="currencies">Currency 2</label>
+                        <select id="currency2" name="currencies">
+                            <option value="usd" selected>U.S. dollar (USD)</option>
+                            <option value="dzd">Algerian dinar (DZD)</option>
+                            <option value="aud">Australian dollar (AUD)</option>
+                            <option value="bhd">Bahrain dinar (BHD)</option>
+                            <option value="vef">Bolivar Fuerte (VEF)</option>
+                            <option value="bwp">Botswana pula (BWP)</option>
+                            <option value="brl">Brazilian real (BRL)</option>
+                            <option value="bnd">Brunei dollar (BND)</option>
+                            <option value="cad">Canadian dollar (CAD)</option>
+                            <option value="clp">Chilean peso (CLP)</option>
+                            <option value="cny">Chinese yuan (CNY)</option>
+                            <option value="cop">Colombian peso (COP)</option>
+                            <option value="czk">Czech koruna (CZK)</option>
+                            <option value="dkk">Danish krone (DKK)</option>
+                            <option value="eur">Euro (EUR)</option>
+                            <option value="huf">Hungarian forint (HUF)</option>
+                            <option value="isk">Icelandic krona (ISK)</option>
+                            <option value="inr">Indian rupee (INR)</option>
+                            <option value="idr">Indonesian rupiah (IDR)</option>
+                            <option value="irr">Iranian rial (IRR)</option>
+                            <option value="ils">Israeli New Shekel (ILS)</option>
+                            <option value="jpy">Japanese yen (JPY)</option>
+                            <option value="kzt">Kazakhstani tenge (KZT)</option>
+                            <option value="krw">Korean won (KRW)</option>
+                            <option value="kwd">Kuwaiti dinar (KWD)</option>
+                            <option value="lyd">Libyan dinar (LYD)</option>
+                            <option value="myr">Malaysian ringgit (MYR)</option>
+                            <option value="mur">Mauritian rupee (MUR)</option>
+                            <option value="mxn">Mexican peso (MXN)</option>
+                            <option value="npr">Nepalese rupee (NPR)</option>
+                            <option value="nzd">New Zealand dollar (NZD)</option>
+                            <option value="nok">Norwegian krone (NOK)</option>
+                            <option value="omr">Omani rial (OMR)</option>
+                            <option value="pkr">Pakistani rupee (PKR)</option>
+                            <option value="pen">Peruvian sol (PEN)</option>
+                            <option value="php">Philippine peso (PHP)</option>
+                            <option value="pln">Polish zloty (PLN)</option>
+                            <option value="qar">Qatari riyal (QAR)</option>
+                            <option value="rub">Russian ruble (RUB)</option>
+                            <option value="sar">Saudi Arabian riyal (SAR)</option>
+                            <option value="sgd">Singapore dollar (SGD)</option>
+                            <option value="zar">South African rand (ZAR)</option>
+                            <option value="lkr">Sri Lankan rupee (LKR)</option>
+                            <option value="sek">Swedish krona (SEK)</option>
+                            <option value="chf">Swiss franc (CHF)</option>
+                            <option value="thb">Thai baht (THB)</option>
+                            <option value="ttd">Trinidadian dollar (TTD)</option>
+                            <option value="tnd">Tunisian dinar (TND)</option>
+                            <option value="aed">U.A.E. dirham (AED)</option>
+                            <option value="gbp">U.K. pound (GBP)</option>
+                            <option value="uyu">Uruguayan peso (UYU)</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div>
+                        <label for="startDate" >Start Date</labelfo>
+                        <input type="date" name="startDate" id="startDate" class="" pattern="^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])$" title="Enter start date in format YYYY-MM-DD e.g. 2023-01-23" tabindex="0" required="" oninput="setCustomValidity('')">
+                </div>
+                <div>
+                        <label for="endDate" >End Date</labelfo>
+                        <input type="date" name="endDate" id="startDate" class="" pattern="^[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])$" title="Enter start date in format YYYY-MM-DD e.g. 2023-01-23" tabindex="0" required="" oninput="setCustomValidity('')">
+                </div>
             </div>
         </div>
+    </div>
 
 </body>
 </html>
