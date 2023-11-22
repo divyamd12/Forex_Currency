@@ -15,7 +15,7 @@ from datetime import datetime
 app = Flask(__name__) 
 
 df_s=pd.DataFrame()
-for i in range(12,22):
+for i in range(12,23):
     temp_df = pd.read_csv(f"Exchange_Rate_Report_20{i}.csv")
     df_s=pd.concat([df_s,temp_df], ignore_index=True)
 df_s.set_index("Date")
@@ -29,10 +29,44 @@ df_s['Year'] = df_s['Date'].dt.year
 df_s.columns = [re.sub(r'\s+', ' ', col) for col in df_s.columns]
 df_s.columns = df_s.columns.str.strip()
 
+df_2022 = df_s[ df_s['Year'] == 2021 ]
+print(df_2022)
+
+
 
 @app.route('/')
 def hello():
     return render_template('index.html')
+
+@app.route('/get_amount', methods= ['GET', 'POST'])
+def get_amount():
+    if request.method == 'POST':
+        currency1 = request.form['currency1']
+        currency2 = request.form['currency2']
+        amount = request.form['amount']
+
+        df_curr1 = df_2022[currency1].notnull()
+        df_curr2 = df_2022[currency2].notnull()
+
+        conversion = (1/df_curr1[-1]) * df_curr2[-1]
+
+        total_amount = int(amount) * float(conversion)
+        print(total_amount)
+
+        content = render_template('index.html', amount = total_amount )
+
+        # Create a response object
+        response = make_response(content)
+        
+        return response
+
+
+
+        
+
+
+
+        
 
 
 @app.route('/get_plot', methods=['GET','POST'])
@@ -58,10 +92,10 @@ def get_plot():
 
         if(duration =="Yearly"):
             df_agg = df.groupby(['Date', 'Year'])[currency2].mean().reset_index()
+            print(df_agg)
     
+
             pivot_df = df_agg.pivot(index='Date', columns='Year', values=currency2)
-            # if (currency1 != "U.S. dollar (USD)"):
-            #     pivot_df = df_agg.pivot(index='Date',)
 
             original_missing_mask = pivot_df.isna()
 
@@ -91,11 +125,74 @@ def get_plot():
 
         elif(duration == "Weekly"):
             #code
-            print()
+            df['Week'] = df['Date'].dt.to_period('W') 
+            df_agg = df.groupby(['Date', 'Week'])[(currency2)].mean().reset_index()
+
+            
+            pivot_df = df_agg.pivot(index='Date', columns='Week', values=currency2)
+
+            original_missing_mask = pivot_df.isna()
+
+            window_size = 10
+
+            pivot_df = pivot_df.apply(lambda col: col.fillna(col.rolling(window=window_size, min_periods=1).mean()))
+
+            plt.figure(figsize=(12, 8))
+
+            for col in pivot_df.columns:
+                week_label = col
+
+                plt.plot(pivot_df.index[original_missing_mask[col]], pivot_df[col][original_missing_mask[col]], 'o', label=f'Week {week_label} (Original Missing)', linestyle='None', markersize=3, color='red')
+
+                plt.plot(pivot_df.index, pivot_df[col], label=f'Week {week_label} (Interpolated)')
+
+            plt.xlabel('Date')
+            plt.ylabel(currency2)
+            plt.title(f'Line Plot for {currency2} - Weekly')
+
+            plt.legend()
+            
+            plt.tight_layout()
+
+            plt.savefig(file_path)
+            plt.close()
+    
+
         
         elif(duration =="Quaterly"):
             #code
-            print()
+            df['Quarter'] = df['Date'].dt.to_period('Q')
+            df_agg = df.groupby(['Date', 'Quarter'])[currency2].mean().reset_index()
+
+            pivot_df = df_agg.pivot(index='Date', columns='Quarter', values=currency2)
+
+            original_missing_mask = pivot_df.isna()
+
+            window_size = 10
+
+            pivot_df_interpolated = pivot_df.apply(lambda col: col.fillna(col.rolling(window=window_size, min_periods=1).mean()))
+
+            plt.figure(figsize=(12, 8))
+
+            colors = ['red', 'blue', 'green', 'purple']  
+
+            for i, col in enumerate(pivot_df.columns):
+                quarter_label = col
+
+                plt.plot(pivot_df.index[original_missing_mask[col].any()], df_agg[col][original_missing_mask[col].any()], 'o', label=f'Quarter {quarter_label} (Original Missing)', linestyle='None', markersize=5, color=colors[i % len(colors)])
+
+                plt.plot(pivot_df.index, pivot_df_interpolated[col], label=f'Quarter {quarter_label} (Interpolated)', color=colors[i % len(colors)])
+
+            plt.xlabel('Date')
+            plt.ylabel(currency2)
+            plt.title(f'Line Plot for {currency2} - Quarterly')
+
+            plt.legend()
+
+            plt.tight_layout()
+            plt.savefig(file_path)
+            plt.close()
+
 
         elif(duration =="Monthly"):
             #cpde

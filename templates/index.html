@@ -107,8 +107,36 @@
                 <input type="submit" value="CREATE GRAPH" />
             </div>
             </form>
+
+            <form id="myForm2" action="/get_amount" method="POST">
+                Currency1: <input list="options1" type="text" name="currency1" >
+                    <datalist id="options1">
+                        <option value="usd" selected>U.S. dollar (USD)</option>
+                    </datalist>
+                Currency2: <input list="options1" type="text" name="currency2" >
+                    <datalist id="options1">
+                        <option value="usd" selected>U.S. dollar (USD)</option>
+                    </datalist>
+                Amount:<input type="text" name="amount">
+                    
+
+                <input type="submit" value="Get Amount" />
+
+                
+            </form>
+            
+            
         </div>
     </div>
+
+
+    {% if amount %}
+
+    <p>Hence the total amount you will receive is {{ amount }}</p>
+
+    {% endif %}
+
+    
 
     {% if plot_url %}
         <p>{{ highest_rate }} {{ lowest_rate }} {{ average_rate }}</p>
