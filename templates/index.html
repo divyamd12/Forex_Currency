@@ -8,8 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8a2e7e0724.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./nt.css"/>
-    <link rel="stylesheet" href="./button.css"/>
+    <link rel="stylesheet" href="static/css/nt.css"/>
+    <link rel="stylesheet" href="static/css/button.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Lora&family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -17,21 +17,23 @@
 <body>
     <div class="mainContainer">
         <div class="innerContainer">
+            <form id="myForm" action="/get_plot" method="POST">
             <div class="innermostContainer1">
                 <div class="">
-                    <img src="./nt_logo.png" class="nt-logo" />
+                    <img src="/static/nt_logo.png" class="nt-logo" />
                 </div>
                 <div>
                     <div class="bothCurrencies">
+                        
                         <div class="currencyContainer">
-                            <label for="currencies">Currency 1</label>
-                            <select id="currency2" class="currency" name="currencies">
+                            Currency1: <input list="options1" type="text" name="currency1" >
+                            <datalist id="options1">
                                 <option value="usd" selected>U.S. dollar (USD)</option>
-                            </select>
+                            </datalist>
                         </div>
                         <div class="currencyContainer">
-                            <label for="currencies">Currency 2</label>
-                            <select id="currency2" class="currency" name="currencies">
+                            Currency2: <input list="options2" type="text" name="currency2" >
+                            <datalist id = "options2">
                                 <option value="usd" selected>U.S. dollar (USD)</option>
                                 <option value="dzd">Algerian dinar (DZD)</option>
                                 <option value="aud">Australian dollar (AUD)</option>
@@ -83,8 +85,10 @@
                                 <option value="aed">U.A.E. dirham (AED)</option>
                                 <option value="gbp">U.K. pound (GBP)</option>
                                 <option value="uyu">Uruguayan peso (UYU)</option>
-                            </select>
+                            </datalist>
                         </div>
+                        Duration: <input list="optionsD" type="text" name="duration" >
+                        
                     </div>
                     <br>
                    <div>
@@ -100,10 +104,15 @@
                 </div>
             </div>
             <div class="innerContainer2">
-                <a href="#" class="button-17">Create Graph</a>
+                <input type="submit" value="CREATE GRAPH" />
             </div>
+            </form>
         </div>
     </div>
+
+    {% if plot_url %}
+        <img src="{{ plot_url }}?{{ random_query_parameter }}" alt="image">
+    {% endif %}
 
 </body>
 </html>
