@@ -72,7 +72,7 @@ body {
     height:20vh;
     width:30vw;
 }
-.currencyContainer{
+.currencyContainer,.durationContainer{
     display: flex;
     flex-direction: column;
     flex-grow:1;
@@ -90,4 +90,14 @@ body {
 }
 .calenderContainer label{
     font-weight: bold;
+}
+.forButtons{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+.forButtons .amt{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
 }
