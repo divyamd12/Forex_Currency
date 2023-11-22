@@ -1,12 +1,12 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
     margin: 0;
     padding: 0;
-}        
-
+}       
 .nt-logo{
-    height:150px;
+    height:30px;
 }
 .bg-green{
     background-color: #2d8031;
@@ -26,111 +26,82 @@ body {
 
 .mainContainer{
     background-image: linear-gradient(to bottom, var(--green800), var(--green700), var(--green600), var(--green100));
-    height:100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .innerContainer{
-    background-color: white;
+    background-color:white;
     border-radius: 10px;
-    height:60%;
-    width:80%;
+    height:100%;
+    width:70%;
     display: flex;
     padding:30px;
-    flex-direction:column;
-    justify-content: center;
+    flex-grow: 0;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items: center;
+    flex-wrap: wrap;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
-.innermostContainer1{
-    display: flex;
-    padding:10px;
+
+.allfunctionalValues{
+    display:flex;
+    flex-direction: column;
+    justify-content:center ;
+}
+.maincurrencyContainer{
+    display:flex;
     flex-direction:row;
-    align-items: center;
-    justify-content:space-around;
-    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 .currency{
     width:15vw;
     padding:5px;
     border-radius:5px;
 }
-.innerContainer2{
-    align-self:center;
-}
+
 .bothCurrencies{
     display: flex;
     flex-direction: row;
     justify-content:space-around;
-    
 }
-.innerContainer .nt-logo{
+.nt-logo{
     height:20vh;
     width:30vw;
 }
-.currencyContainer{
+.currencyContainer,.durationContainer{
     display: flex;
     flex-direction: column;
-    flex-shrink:1;
-    margin-right: 10px;
-}
-.currencyContainer label{
+    flex-grow:1;
+    margin-right: 15px;
     font-weight:bold;
 }
-
+.duration{
+    margin-bottom: 20px;
+}
 .calenderContainer{
     display: flex;
     flex-direction:column;
     justify-content: center;
+    width:150px;
 }
 .calenderContainer label{
     font-weight: bold;
 }
-/*media queries*/
-/* Larger screens */
-@media screen and (min-width: 992px) {
-    .innerContainer {
-        width: 70%;
-    }
-    .innerContainer .nt-logo {
-        height: 15vh;
-        width: 25vw;
-    }
-    .currency {
-        width: 12vw;
-    }
+.forButtons{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+.forButtons .amt{
+    display: flex;
+    flex-direction:column;
+    justify-content: space-between;
 }
 
-/* Medium screens */
-@media screen and (max-width: 991px) and (min-width: 768px) {
-    .innerContainer {
-        width: 80%;
-    }
-    .innerContainer .nt-logo {
-        height: 15vh;
-        width: 40vw;
-    }
-    .currency {
-        width: 30vw;
-    }
+.mypara{
+    color: white;
 }
-
-/* Small screens */
-@media screen and (max-width: 767px) {
-    .innerContainer {
-        width: 90%;
-    }
-    .innerContainer .nt-logo {
-        height: 15vh;
-        width: 70vw;
-    }
-    .currency {
-        width: 80%;
-    }
-    .calenderContainer,
-    .button-17 {
-        margin-top: 20px;
-    }
-}
-

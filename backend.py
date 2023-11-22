@@ -53,7 +53,8 @@ def get_amount():
         total_amount = int(amount) * float(conversion)
         print(total_amount)
 
-        content = render_template('index.html', amount = total_amount )
+        random_query_parameter = random.randint(1, 1000000)
+        content = render_template('index.html', amount = total_amount , random_query_parameter=random_query_parameter)
 
         # Create a response object
         response = make_response(content)
