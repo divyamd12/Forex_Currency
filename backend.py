@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 import random
 import regex as re
 import numpy as np
+from datetime import datetime
 
 app = Flask(__name__) 
 
@@ -41,18 +42,13 @@ def get_plot():
         currency1 = request.form['currency1']
         currency2 = request.form['currency2']
         duration = request.form['duration']
-        start_date = request.form['startDate']
-        end_date = request.form['endDate']
+        start_year = request.form['startDate']
+        end_year  = request.form['endDate']
 
-        start_date = pd.to_datetime(start_date, errors='coerce')
-        end_date = pd.to_datetime(end_date, errors='coerce')
-
-
-        while(start_date not in df_s.index):
-            start_date = start_date + pd.to_timedelta(1, unit="D")
-
-
-
+        df = df_s[(df_s['Year'] >= int(start_year)) & (df_s['Year'] <= int(end_year))]
+        highest_rate = df[currency2].max()
+        lowest_rate = df[currency2].min()
+        average_rate = df[currency2].mean()
 
 
         file_path = "static/my_plot.png"
@@ -64,10 +60,12 @@ def get_plot():
             df_agg = df.groupby(['Date', 'Year'])[currency2].mean().reset_index()
     
             pivot_df = df_agg.pivot(index='Date', columns='Year', values=currency2)
+            # if (currency1 != "U.S. dollar (USD)"):
+            #     pivot_df = df_agg.pivot(index='Date',)
 
             original_missing_mask = pivot_df.isna()
 
-            window_size = 10
+            window_size = 50
 
             # Use rolling mean to calculate the mean of the neighboring 10 data points for each column
             pivot_df = pivot_df.apply(lambda col: col.fillna(col.rolling(window=window_size, min_periods=1).mean()))
@@ -77,7 +75,7 @@ def get_plot():
             for col in pivot_df.columns:
                 year_label = col
 
-                plt.plot(pivot_df.index[original_missing_mask[col]], pivot_df[col][original_missing_mask[col]], 'o', label=f'Year {year_label} (Original Missing)', linestyle='None', markersize=5, color='red')
+                plt.plot(pivot_df.index[original_missing_mask[col]], pivot_df[col][original_missing_mask[col]], 'o', label=f'Year {year_label} (Original Missing)', linestyle='None', markersize=1, color='red')
 
                 plt.plot(pivot_df.index, pivot_df[col], label=f'Year {year_label} (Interpolated)')
 
@@ -122,7 +120,8 @@ def get_plot():
 
         random_query_parameter = random.randint(1, 1000000)
 
-        content = render_template('index.html', plot_url=file_path, random_query_parameter=random_query_parameter)
+        content = render_template('index.html', plot_url=file_path, random_query_parameter=random_query_parameter, highest_rate= highest_rate, 
+        lowest_rate = lowest_rate, average_rate = average_rate )
 
         # Create a response object
         response = make_response(content)
