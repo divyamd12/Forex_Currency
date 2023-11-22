@@ -41,13 +41,18 @@ def get_plot():
         currency1 = request.form['currency1']
         currency2 = request.form['currency2']
         duration = request.form['duration']
-        date_start = request.form['startDate']
-        date_end = request.form['endDate']
+        start_date = request.form['startDate']
+        end_date = request.form['endDate']
 
-        nearest_date_start = np.abs(df_s.index - pd.to_datetime(date_start)).argmin()
-        nearest_date_end = np.abs(df_s.index - pd.to_datetime(date_end)).argmin()
+        start_date = pd.to_datetime(start_date, errors='coerce')
+        end_date = pd.to_datetime(end_date, errors='coerce')
 
-        df = df_s.loc[nearest_date_start,nearest_date_end]
+
+        while(start_date not in df_s.index):
+            start_date = start_date + pd.to_timedelta(1, unit="D")
+
+
+
 
 
         file_path = "static/my_plot.png"
