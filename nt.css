@@ -1,0 +1,55 @@
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+}        
+
+.nt-logo{
+    height:150px;
+}
+.bg-green{
+    background-color: #2d8031;
+}
+
+:root {
+    --green100: #dfe8e5;
+    --green200: #bdd0c9;
+    --green300: #9ab8ae;
+    --green400: #78a093;
+    --green500: #568777;
+    --green600: #336f5c;
+    --green700: #115740;
+    --green800: #0d4936;
+    --green900: #093b2b;
+}
+
+.mainContainer{
+    background-image: linear-gradient(to bottom, var(--green800), var(--green700), var(--green600), var(--green100));
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.innerContainer{
+    background-color: white;
+    border-radius: 10px;
+    height:60%;
+    width:80%;
+    display: flex;
+    padding:30px;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+
+}
+
+.innerContainer nt-logo{
+    background-color: white;
+}
+.currencyContainer{
+    display: flex;
+    flex-direction: column;
+}
