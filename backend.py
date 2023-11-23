@@ -54,10 +54,11 @@ def get_amount():
         print(total_amount)
 
         random_query_parameter = random.randint(1, 1000000)
-        content = render_template('index.html', amount = total_amount , random_query_parameter=random_query_parameter)
+        content = render_template('index.html', amount = "The predicted price is {}".format(total_amount) , random_query_parameter=random_query_parameter)
 
         # Create a response object
         response = make_response(content)
+        
         
         return response
 
@@ -93,40 +94,37 @@ def get_plot():
 
         if(duration =="Yearly"):
             df_agg = df.groupby(['Date', 'Year'])[currency2].mean().reset_index()
-            print(df_agg)
-    
 
             pivot_df = df_agg.pivot(index='Date', columns='Year', values=currency2)
 
             original_missing_mask = pivot_df.isna()
+            window_size = 8
 
-            window_size = 50
-
-            # Use rolling mean to calculate the mean of the neighboring 10 data points for each column
             pivot_df = pivot_df.apply(lambda col: col.fillna(col.rolling(window=window_size, min_periods=1).mean()))
 
             plt.figure(figsize=(12, 8))
 
             for col in pivot_df.columns:
                 year_label = col
-
-                plt.plot(pivot_df.index[original_missing_mask[col]], pivot_df[col][original_missing_mask[col]], 'o', label=f'Year {year_label} (Original Missing)', linestyle='None', markersize=1, color='red')
+                print(year_label)
+                plt.plot(pivot_df.index[original_missing_mask[col]], pivot_df[col][original_missing_mask[col]], 'o', label=f'Year {year_label} (Original Missing)', linestyle='None', markersize=5, color='red')
 
                 plt.plot(pivot_df.index, pivot_df[col], label=f'Year {year_label} (Interpolated)')
 
             plt.xlabel('Year')
             plt.ylabel(currency2)
             plt.title(f'Line Plot for {currency2} - Yearly')
-
+            
             plt.legend()
 
             plt.tight_layout()
+
             plt.savefig(file_path)
             plt.close()
 
         elif(duration == "Weekly"):
             #code
-            df['Week'] = df['Date'].dt.to_period('W') 
+            df['Week'] = df_s['Date'].dt.to_period('W') 
             df_agg = df.groupby(['Date', 'Week'])[(currency2)].mean().reset_index()
 
             
@@ -143,7 +141,7 @@ def get_plot():
             for col in pivot_df.columns:
                 week_label = col
 
-                plt.plot(pivot_df.index[original_missing_mask[col]], pivot_df[col][original_missing_mask[col]], 'o', label=f'Week {week_label} (Original Missing)', linestyle='None', markersize=3, color='red')
+                plt.plot(pivot_df.index[original_missing_mask[col]], pivot_df[col][original_missing_mask[col]], 'o', label=f'Week {week_label} (Original Missing)', linestyle='None', markersize=2, color='red')
 
                 plt.plot(pivot_df.index, pivot_df[col], label=f'Week {week_label} (Interpolated)')
 
@@ -160,39 +158,41 @@ def get_plot():
     
 
         
-        elif(duration =="Quaterly"):
-            #code
-            df['Quarter'] = df['Date'].dt.to_period('Q')
-            df_agg = df.groupby(['Date', 'Quarter'])[currency2].mean().reset_index()
+        # elif(duration =="Quaterly"):
+        #     #code
+        #     df['Quarter'] = df['Date'].dt.to_period('Q')
+        #     df_agg = df.groupby(['Date', 'Quarter'])[currency2].mean().reset_index()
 
-            pivot_df = df_agg.pivot(index='Date', columns='Quarter', values=currency2)
+        #     pivot_df = df_agg.pivot(index='Date', columns='Quarter', values=currency2)
 
-            original_missing_mask = pivot_df.isna()
+        #     original_missing_mask = pivot_df.isna()
 
-            window_size = 10
+        #     window_size = 10
 
-            pivot_df_interpolated = pivot_df.apply(lambda col: col.fillna(col.rolling(window=window_size, min_periods=1).mean()))
+        #     pivot_df_interpolated = pivot_df.apply(lambda col: col.fillna(col.rolling(window=window_size, min_periods=1).mean()))
 
-            plt.figure(figsize=(12, 8))
+        #     plt.figure(figsize=(12, 8))
 
-            colors = ['red', 'blue', 'green', 'purple']  
+        #     colors = ['red', 'blue', 'green', 'purple']  # You can add more colors as needed
 
-            for i, col in enumerate(pivot_df.columns):
-                quarter_label = col
+        #     for i, col in enumerate(pivot_df.columns):
+        #         quarter_label = col
 
-                plt.plot(pivot_df.index[original_missing_mask[col].any()], df_agg[col][original_missing_mask[col].any()], 'o', label=f'Quarter {quarter_label} (Original Missing)', linestyle='None', markersize=5, color=colors[i % len(colors)])
+        #         plt.plot(pivot_df.index[original_missing_mask[col]], df_agg[col][original_missing_mask[col]], 'o', label=f'Quarter {quarter_label} (Original Missing)', linestyle='None', markersize=5, color=colors[i % len(colors)])
 
-                plt.plot(pivot_df.index, pivot_df_interpolated[col], label=f'Quarter {quarter_label} (Interpolated)', color=colors[i % len(colors)])
+        #         plt.plot(pivot_df.index, pivot_df_interpolated[col], label=f'Quarter {quarter_label} (Interpolated)', color=colors[i % len(colors)])
 
-            plt.xlabel('Date')
-            plt.ylabel(currency2)
-            plt.title(f'Line Plot for {currency2} - Quarterly')
+        #     plt.xlabel('Date')
+        #     plt.ylabel(currency2)
+        #     plt.title(f'Line Plot for {currency2} - Quarterly')
 
-            plt.legend()
+        #     plt.legend()
 
-            plt.tight_layout()
-            plt.savefig(file_path)
-            plt.close()
+        #     plt.tight_layout()
+
+
+        #     plt.savefig(file_path)
+        #     plt.close()
 
 
         elif(duration =="Monthly"):
@@ -218,8 +218,8 @@ def get_plot():
 
         random_query_parameter = random.randint(1, 1000000)
 
-        content = render_template('index.html', plot_url=file_path, random_query_parameter=random_query_parameter, highest_rate= highest_rate, 
-        lowest_rate = lowest_rate, average_rate = average_rate )
+        content = render_template('index.html', plot_url=file_path, random_query_parameter=random_query_parameter, highest_rate= "Highest value- {}".format(highest_rate), 
+        lowest_rate = "Lowest value- {}".format(lowest_rate), average_rate = "FX value- {}".format(average_rate) )
 
         # Create a response object
         response = make_response(content)

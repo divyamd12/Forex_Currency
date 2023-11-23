@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&family=Lora&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://media-s3-us-east-1.ceros.com/northern-trust/images/2023/05/31/0abf7135c2830146e9d9c6be935278d8/processed-svg-anchor-icon.svg" type="image/x-icon">
 </head>
 <body>
     <d class="mainContainer">
@@ -136,7 +137,7 @@
                         </div>
                     </div>
                     <div class="durationContainer">
-                        Duration: <input list="options3" type="text" placeholder="" name="duration" >
+                        Duration: <input list="options3" type="text" placeholder="Yearly or Weekly" name="duration" >
                         <datalist id="options3">
                             <option value="Yearly" selected>Yearly</option>
                             <option value="Weekly">Weekly</option>
@@ -155,19 +156,17 @@
                     
                 </div>
                 <div class="forButtons">
-                    <input type="submit" class="button-17" value="CREATE GRAPH" /> 
+                    <input type="submit" class="button-17" value="CREATE GRAPH"/>
                     
                 </div>
-
-                
-        
-                
+        <p>{{ highest_rate }} , {{ lowest_rate }} , {{ average_rate }}</p>
         </form>
+
         <br><br><br><br><br>
         <div class = "innerContainer">
 
         <form id="myForm2" action="/get_amount" method="POST">
-            Currency1: <input list="options1" type="text" name="currency1" >
+            Currency1: <input list="options1" type="text" placeholder="From" ="currency1" >
                 <datalist id="options1">
                     <option value="U.S. dollar (USD)" selected>U.S. dollar (USD)</option>
                     <option value="Algerian dinar (DZD)">Algerian dinar (DZD)</option>
@@ -222,7 +221,7 @@
                     <option value="Uruguayan peso (UYU)">Uruguayan peso (UYU)</option>        
                 </datalist>
                 
-            Currency2: <input list="options1" type="text" name="currency2" >
+            Currency2: <input list="options1" type="text" placeholder="To" ="currency2" >
                 <datalist id="options1">
                     <option value="U.S. dollar (USD)" selected>U.S. dollar (USD)</option>
                     <option value="Algerian dinar (DZD)">Algerian dinar (DZD)</option>
@@ -279,7 +278,7 @@
             Amount: <input type="text" name="amount" >
                 
 
-            <input type="submit" value="Get Amount" />
+            <input type="submit" value="Get Amount" class="button-17" />
 
             <p>Hence the total amount you will receive is "{{ amount }}"</p>
 
