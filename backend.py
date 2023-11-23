@@ -235,7 +235,7 @@ def get_plot():
         print("in post")
         return render_template('index.html')
 
-app.secret_key= "its a secret"
+
 
 if __name__ == '__main__':
     app.run(debug=True)
