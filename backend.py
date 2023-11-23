@@ -45,10 +45,16 @@ def get_amount():
         currency2 = request.form['currency2']
         amount = request.form['amount']
 
-        df_curr1 = df_2022[currency1].notnull()
-        df_curr2 = df_2022[currency2].notnull()
+        df_curr1 = df_2022[df_2022[currency1].notnull()]
 
-        conversion = (1/df_curr1[-1]) * df_curr2[-1]
+        last_value1 = df_curr1[currency1].iloc[-1]
+
+
+        df_curr2 = df_2022[df_2022[currency2].notnull()]
+
+        last_value2 = df_curr2[currency2].iloc[-1]
+
+        conversion = (1/int(last_value1)) * int(last_value2)
 
         total_amount = int(amount) * float(conversion)
         print(total_amount)
@@ -61,9 +67,6 @@ def get_amount():
         
         
         return response
-
-
-
         
 
 
