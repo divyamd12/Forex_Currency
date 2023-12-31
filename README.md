@@ -1,12 +1,4 @@
-# MITWPU-team21-ForexDashboard
-College Name: MIT-WPU
-Team Number: 21
-Members: 
-1.	Divyam Dholwani
-2.	Harsh Rane
-3.	Khilee Singhal
-4.	Manas Pal
-5.	Manav Chandak
+
 
 
 # 1. Introduction 
